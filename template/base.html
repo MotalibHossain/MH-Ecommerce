@@ -74,7 +74,7 @@
                 </div>
             </div>
 
-            <div class="wrap-menu-desktop">
+            <div class="wrap-menu-desktop how-shadow1">
                 <nav class="limiter-menu-desktop container">
 
                     <!-- Logo desktop -->
@@ -83,7 +83,7 @@
                     </a>
 
                     <!-- Menu desktop -->
-                    <div class="menu-desktop">
+                    <div class="menu-desktop ">
                         <ul class="main-menu">
                             <li class="active-menu">
                                 <a href="/">Home</a>
@@ -95,15 +95,15 @@
                             </li>
 
                             <li>
-                                <a href="product.html">Shop</a>
+                                <a href="{% url 'shop:Shop'%}">Shop</a>
                             </li>
 
                             <li class="label1" data-label1="hot">
-                                <a href="shoping-cart.html">Features</a>
+                                <a href="{% url 'shop:Features'%}">Features</a>
                             </li>
 
                             <li>
-                                <a href="blog.html">Blog</a>
+                                <a href="{% url 'shop:Blog'%}">Blog</a>
                             </li>
 
                             <li>
@@ -111,7 +111,7 @@
                             </li>
 
                             <li>
-                                <a href="contact.html">Contact</a>
+                                <a href="{% url 'shop:Contact'%}">Contact</a>
                             </li>
                         </ul>
                     </div>
