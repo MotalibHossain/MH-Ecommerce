@@ -1,4 +1,6 @@
 from unicodedata import name
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, include
 from shop.views import (
     Home,
@@ -18,4 +20,4 @@ urlpatterns = [
     path('blog/', Blog, name="Blog"),
     path('contact/', Contact, name="Contact"),
     path('about/', About, name="About"),
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
