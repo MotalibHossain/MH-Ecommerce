@@ -1,9 +1,21 @@
+from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import render
+from shop.models import Catagory, Product
 
 # Create your views here.
 def Home(request):
-    return render(request, 'shop/index.html')
+    all_catagory=Catagory.objects.all()
+    print(all_catagory)
+    all_product=Product.objects.all()
+
+    for cat in all_catagory:
+        if cat == cat:
+            all_man=Product.objects.filter(catagory=cat)
+            print(all_man)
+
+    context={"all_product":all_product, "all_catagory":all_catagory, "all_man":all_man}
+    return render(request, 'shop/index.html', context)
 
     
 def Shop(request):
