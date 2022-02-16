@@ -6,15 +6,22 @@ from shop.models import Catagory, Product
 # Create your views here.
 def Home(request):
     all_catagory=Catagory.objects.all()
-    print(all_catagory)
+
     all_product=Product.objects.all()
 
     for cat in all_catagory:
-        if cat == cat:
+        if str(cat) == 'Man':
             all_man=Product.objects.filter(catagory=cat)
-            print(all_man)
 
-    context={"all_product":all_product, "all_catagory":all_catagory, "all_man":all_man}
+        if str(cat) == 'Women':
+            all_women=Product.objects.filter(catagory=cat)
+
+    context={
+        "all_product":all_product,
+        "all_catagory":all_catagory,
+        "all_man":all_man,
+        "all_women":all_women,
+     }
     return render(request, 'shop/index.html', context)
 
     
