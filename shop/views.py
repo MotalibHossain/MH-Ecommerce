@@ -3,6 +3,7 @@ from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import render
 from shop.models import Catagory, Product
+from shop.utils import CatagoryWiseProduct
 
 # Create your views here.
 
@@ -12,25 +13,25 @@ def Home(request):
     all_product = Product.objects.all()
 
     # Showing product catagory wise
-    for cat in all_catagory:
-        if str(cat) == 'Man':
-            all_man = Product.objects.filter(catagory=cat)
-        if str(cat) == 'Women':
-            all_women = Product.objects.filter(catagory=cat)
-            
+    context1=CatagoryWiseProduct(all_catagory)
+
     context = {
         "all_product": all_product,
         "all_catagory": all_catagory,
-        "all_man": all_man,
-        "all_women": all_women,
     }
-    return render(request, 'shop/index.html', context)
+    # marge two context into single context 
+    context.update(context1)
+    return render(request, 'shop/index.html',context)
 
 
 def productDetails(request,slug):
     all_product=Product.objects.all()
-    myproduct=Product.objects.get(slug=slug)
-    context={"myproduct":myproduct, "all_product":all_product}
+    each_product=Product.objects.get(slug=slug)
+
+    context={
+        "each_product":each_product,
+        "all_product":all_product
+    }
     return render(request, 'shop/product-detail.html', context)
 
 def Shop(request):
