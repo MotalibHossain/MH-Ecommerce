@@ -2,6 +2,8 @@ from distutils.command.upload import upload
 from turtle import title
 from unicodedata import name
 from django.db import models
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
 
 # Create your models here.
 class Catagory(models.Model):
@@ -29,5 +31,7 @@ class Product(models.Model):
     
     class Meta:
         ordering=['-published_date',]
+    def get_absolute_url(self):
+        return reverse_lazy('shop:productDetails', args=[self.slug])
 
     

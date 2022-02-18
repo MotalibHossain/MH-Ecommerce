@@ -9,6 +9,7 @@ from shop.views import (
     Blog,
     Contact, 
     About,
+    productDetails,
 )
 
 app_name="shop"
@@ -20,4 +21,5 @@ urlpatterns = [
     path('blog/', Blog, name="Blog"),
     path('contact/', Contact, name="Contact"),
     path('about/', About, name="About"),
+    path('productDetails/<str:slug>', productDetails, name="productDetails"),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
