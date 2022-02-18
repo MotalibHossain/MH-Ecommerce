@@ -28,8 +28,9 @@ def Home(request):
 
 
 def productDetails(request,slug):
+    all_product=Product.objects.all()
     myproduct=Product.objects.get(slug=slug)
-    context={"product":myproduct}
+    context={"myproduct":myproduct, "all_product":all_product}
     return render(request, 'shop/product-detail.html', context)
 
 def Shop(request):
