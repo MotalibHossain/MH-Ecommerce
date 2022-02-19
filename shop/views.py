@@ -27,10 +27,13 @@ def Home(request):
 def productDetails(request,slug):
     all_product=Product.objects.all()
     each_product=Product.objects.get(slug=slug)
+    catagory=each_product.catagory
+    this_catagory=Product.objects.filter(catagory=catagory)
 
     context={
         "each_product":each_product,
-        "all_product":all_product
+        "all_product":all_product,
+        "this_catagory":this_catagory,
     }
     return render(request, 'shop/product-detail.html', context)
 

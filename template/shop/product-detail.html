@@ -454,7 +454,7 @@
 			<!-- Slide2 -->
 			<div class="wrap-slick2">
 				<div class="slick2">
-					{% for product in all_product%}
+					{% for product in this_catagory%}
 					<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 						<!-- Block2 -->
 						<div class="block2">
@@ -468,7 +468,7 @@
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="{{product.get_absolute_url}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										{{product.name}}
 									</a>
 
@@ -499,7 +499,7 @@
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="{{product.get_absolute_url}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										{{product.name}}
 									</a>
 
