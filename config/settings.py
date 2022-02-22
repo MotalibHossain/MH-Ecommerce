@@ -30,6 +30,7 @@ INSTALLED_APPS = [
 
     # Install apps
     'shop.apps.ShopConfig',
+    'App_User.apps.AppUserConfig'
 ]
 
 MIDDLEWARE = [
