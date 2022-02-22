@@ -38,7 +38,19 @@ def productDetails(request,slug):
     return render(request, 'shop/product-detail.html', context)
 
 def Shop(request):
-    return render(request, 'shop/product.html')
+    all_catagory = Catagory.objects.all()
+    all_product = Product.objects.all()
+
+    # Showing product catagory wise
+    context1=CatagoryWiseProduct(all_catagory)
+
+    context = {
+        "all_product": all_product,
+        "all_catagory": all_catagory,
+    }
+    # marge two context into single context 
+    context.update(context1)
+    return render(request, 'shop/product.html', context)
 
 
 def Features(request):
