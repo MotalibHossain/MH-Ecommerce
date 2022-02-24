@@ -18,3 +18,5 @@
 - [x] User Login and Registrations.
 - [x] Show User profile after login.
 - [x] Product Showing.
+- [x] Product Add to cart.
+- [x] Product place order.
