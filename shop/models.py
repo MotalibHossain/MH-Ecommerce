@@ -31,6 +31,8 @@ class Product(models.Model):
     
     class Meta:
         ordering=['-published_date',]
+
+        
     def get_absolute_url(self):
         return reverse_lazy('shop:productDetails', args=[self.slug])
 

@@ -1,7 +1,9 @@
 from turtle import update
 from urllib import request
+from django.shortcuts import redirect
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 from shop.models import Product
 
 # Create your models here.
@@ -20,3 +22,5 @@ class Card(models.Model):
     def totalCost(self):
         total=self.item.price * self.quantity
         return total
+    def get_absolute_url(self):
+        return reverse_lazy('App_Order:card', args=[self.id])
