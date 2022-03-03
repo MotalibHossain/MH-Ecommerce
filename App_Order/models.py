@@ -6,7 +6,6 @@ from django.shortcuts import redirect
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
-from App_Order.views import card
 from shop.models import Product
 
 # Create your models here.
@@ -37,11 +36,11 @@ class Order(models.Model):
     create=models.DateTimeField(auto_now_add=True)
     update=models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.user + '===>' + self.orderId
-
     def orderTotal(self):
         total=0
         for orderitem in self.orderItem.objects.all():
             total+=float(orderitem.totalCost())
             return total
+            
+    def __str__(self):
+        return f'{self.user} ---> {self.orderId}'
