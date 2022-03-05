@@ -15,9 +15,13 @@ from shop.models import Product
 def card(request,id):
     item=get_object_or_404(Product, id=id)
     cardItem=Card.objects.get_or_create(item=item, user=request.user, purchased=False)
+    print("This is card item======", cardItem)
     userOrder=Order.objects.filter(user=request.user, ordered=False)
+    print("This is user======", userOrder)
     if userOrder.exists():
         order_Product_List=userOrder[0]
+        userOrder=Order.objects.filter(user=request.user, ordered=False)
+        print("This is order product======", order_Product_List)
         if order_Product_List.orderItem.filter(item=item):
             cardItem[0].quantity+=1
             cardItem[0].save()
