@@ -15,28 +15,32 @@ from shop.models import Product
 def card(request,id):
     item=get_object_or_404(Product, id=id)
     cardItem=Card.objects.get_or_create(item=item, user=request.user, purchased=False)
-    print("This is card item======", cardItem)
     userOrder=Order.objects.filter(user=request.user, ordered=False)
-    print("This is user======", userOrder)
+
     if userOrder.exists():
         order_Product_List=userOrder[0]
         userOrder=Order.objects.filter(user=request.user, ordered=False)
-        print("This is order product======", order_Product_List)
         if order_Product_List.orderItem.filter(item=item):
             cardItem[0].quantity+=1
             cardItem[0].save()
             messages.info(request, "Quantity added successfully")
-            # return redirect("shop:Home")
+            return redirect("shop:productDetails")
         else:
             order_Product_List.orderItem.add(cardItem[0])
             messages.info(request, "Successfully add products.")
-            # return redirect("shop:Home")
+            return redirect("shop:productDetails")
     else:
         order=Order(user=request.user)
         order.save()
         order.orderItem.add(cardItem[0])
         messages.info(request, "successfully added")
-    
-    all_card_item=Card.objects.all()
+        return redirect("shop:productDetails")
+
+@login_required
+def Card_View(request):
+    # item=Product.objects.filter(id=id)
+    # print(item)
+    all_card_item=Card.objects.filter(user=request.user, purchased=False)
+    print(all_card_item)
     context={"all_card_item":all_card_item}
     return render(request, 'Order/shoping-cart.html', context)

@@ -3,6 +3,7 @@ from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import render
 from shop.models import Catagory, Product
+from App_Order.models import Card
 from shop.utils import CatagoryWiseProduct
 
 # Create your views here.
@@ -30,10 +31,14 @@ def productDetails(request,slug):
     catagory=each_product.catagory
     this_catagory=Product.objects.filter(catagory=catagory)
 
+    all_card_item=Card.objects.filter(user=request.user, purchased=False)
+    print(all_card_item)
+
     context={
         "each_product":each_product,
         "all_product":all_product,
         "this_catagory":this_catagory,
+        "all_card_item":all_card_item,
     }
     return render(request, 'shop/product-detail.html', context)
 
