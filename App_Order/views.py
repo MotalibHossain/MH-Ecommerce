@@ -24,17 +24,17 @@ def card(request,id):
             cardItem[0].quantity+=1
             cardItem[0].save()
             messages.info(request, "Quantity added successfully")
-            return redirect("shop:productDetails")
+            return redirect("shop:Home")
         else:
             order_Product_List.orderItem.add(cardItem[0])
             messages.info(request, "Successfully add products.")
-            return redirect("shop:productDetails")
+            return redirect("shop:Home")
     else:
         order=Order(user=request.user)
         order.save()
         order.orderItem.add(cardItem[0])
         messages.info(request, "successfully added")
-        return redirect("shop:productDetails")
+        return redirect("shop:Home")
 
 @login_required
 def Card_View(request):
