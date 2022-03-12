@@ -26,6 +26,7 @@ class Card(models.Model):
         return total
     def get_absolute_url(self):
         return reverse_lazy('App_Order:card', args=[self.id])
+        # return reverse_lazy('App_Order:card', args=[self.slug])
 
 class Order(models.Model):
     orderItem=models.ManyToManyField(Card)

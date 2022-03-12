@@ -52,6 +52,7 @@ def productDetails(request,slug):
         order=Order.objects.filter(user=request.user, ordered=False)
         order=order[0]
 
+        # show all product informations and catagory product
         all_product=Product.objects.all()
         each_product=Product.objects.get(slug=slug)
         catagory=each_product.catagory

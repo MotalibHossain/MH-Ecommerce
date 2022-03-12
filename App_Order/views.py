@@ -1,7 +1,8 @@
 from email import message
 from multiprocessing import context
 from django.shortcuts import redirect, render, get_object_or_404
-from django.http import HttpResponse
+from django.urls import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 # decorators 
 from django.contrib.auth.decorators import login_required
@@ -14,6 +15,7 @@ from shop.models import Product
 @login_required
 def card(request,id):
     item=get_object_or_404(Product, id=id)
+    slug=item.slug
     cardItem=Card.objects.get_or_create(item=item, user=request.user, purchased=False)
     userOrder=Order.objects.filter(user=request.user, ordered=False)
 
@@ -24,17 +26,16 @@ def card(request,id):
             cardItem[0].quantity+=1
             cardItem[0].save()
             messages.info(request, "Quantity added successfully")
-            return redirect("shop:Home")
+            return HttpResponseRedirect(reverse("shop:productDetails", kwargs={'slug':slug}))
         else:
             order_Product_List.orderItem.add(cardItem[0])
             messages.info(request, "Successfully add products.")
-            return redirect("shop:Home")
+            return HttpResponseRedirect(reverse("shop:productDetails", kwargs={'slug':slug}))
     else:
         order=Order(user=request.user)
         order.save()
         order.orderItem.add(cardItem[0])
         messages.info(request, "successfully added")
-        return redirect("shop:Home")
 
 @login_required
 def Card_View(request):
