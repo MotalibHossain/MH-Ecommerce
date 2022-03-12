@@ -20,7 +20,6 @@ def Home(request):
         # Showing product catagory wise
         context1=CatagoryWiseProduct(all_catagory)
 
-
         context = {
         "all_product": all_product,
         "all_catagory": all_catagory,
@@ -48,32 +47,72 @@ def Home(request):
 
 
 def productDetails(request,slug):
-    all_product=Product.objects.all()
-    each_product=Product.objects.get(slug=slug)
-    catagory=each_product.catagory
-    this_catagory=Product.objects.filter(catagory=catagory)
+    if request.user.is_authenticated:
+        all_card_item=Card.objects.filter(user=request.user,  purchased=False)
+        order=Order.objects.filter(user=request.user, ordered=False)
+        order=order[0]
 
-    context={
-        "each_product":each_product,
-        "all_product":all_product,
-        "this_catagory":this_catagory,
-    }
-    return render(request, 'shop/product-detail.html', context)
+        all_product=Product.objects.all()
+        each_product=Product.objects.get(slug=slug)
+        catagory=each_product.catagory
+        this_catagory=Product.objects.filter(catagory=catagory)
+
+        context={
+            "each_product":each_product,
+            "all_product":all_product,
+            "this_catagory":this_catagory,
+            "all_card_item":all_card_item,
+            "order":order,
+        }
+        return render(request, 'shop/product-detail.html', context)
+    else:
+        all_product=Product.objects.all()
+        each_product=Product.objects.get(slug=slug)
+        catagory=each_product.catagory
+        this_catagory=Product.objects.filter(catagory=catagory)
+
+        context={
+            "each_product":each_product,
+            "all_product":all_product,
+            "this_catagory":this_catagory,
+        }
+        return render(request, 'shop/product-detail.html', context)
 
 def Shop(request):
-    all_catagory = Catagory.objects.all()
-    all_product = Product.objects.all()
+    if request.user.is_authenticated:
+        all_card_item=Card.objects.filter(user=request.user,  purchased=False)
+        order=Order.objects.filter(user=request.user, ordered=False)
+        order=order[0]
 
-    # Showing product catagory wise
-    context1=CatagoryWiseProduct(all_catagory)
+        all_catagory = Catagory.objects.all()
+        all_product = Product.objects.all()
 
-    context = {
-        "all_product": all_product,
-        "all_catagory": all_catagory,
-    }
-    # marge two context into single context 
-    context.update(context1)
-    return render(request, 'shop/product.html', context)
+        # Showing product catagory wise
+        context1=CatagoryWiseProduct(all_catagory)
+
+        context = {
+            "all_product": all_product,
+            "all_catagory": all_catagory,
+            "all_card_item":all_card_item,
+            "order":order,
+        }
+        # marge two context into single context 
+        context.update(context1)
+        return render(request, 'shop/product.html', context)
+    else:
+        all_catagory = Catagory.objects.all()
+        all_product = Product.objects.all()
+
+        # Showing product catagory wise
+        context1=CatagoryWiseProduct(all_catagory)
+
+        context = {
+            "all_product": all_product,
+            "all_catagory": all_catagory,
+        }
+        # marge two context into single context 
+        context.update(context1)
+        return render(request, 'shop/product.html', context)
 
 
 def Features(request):
