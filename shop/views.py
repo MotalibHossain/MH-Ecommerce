@@ -14,6 +14,8 @@ def Home(request):
         all_card_item=Card.objects.filter(user=request.user,  purchased=False)
         order=Order.objects.filter(user=request.user, ordered=False)
         order=order[0]
+        # count how many product add into card through active user 
+        number_of_product=Card.objects.filter(user=request.user, purchased=False).count()
 
         all_catagory = Catagory.objects.all()
         all_product = Product.objects.all()
@@ -25,6 +27,7 @@ def Home(request):
         "all_catagory": all_catagory,
         "all_card_item":all_card_item,
         "order":order,
+        'number_of_product':number_of_product,
         }
         # marge two context into single context 
         context.update(context1)
@@ -51,6 +54,7 @@ def productDetails(request,slug):
         all_card_item=Card.objects.filter(user=request.user,  purchased=False)
         order=Order.objects.filter(user=request.user, ordered=False)
         order=order[0]
+        number_of_product=Card.objects.filter(user=request.user, purchased=False).count()
 
         # show all product informations and catagory product
         all_product=Product.objects.all()
@@ -64,6 +68,7 @@ def productDetails(request,slug):
             "this_catagory":this_catagory,
             "all_card_item":all_card_item,
             "order":order,
+            "number_of_product":number_of_product,
         }
         return render(request, 'shop/product-detail.html', context)
     else:
