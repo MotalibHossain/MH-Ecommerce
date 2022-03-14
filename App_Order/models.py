@@ -39,8 +39,10 @@ class Order(models.Model):
 
     def orderTotal(self):
         total=0
-        for orderitem in self.orderItem.objects.all():
-            total+=float(orderitem.totalCost())
+        for orderitem in self.orderItem.all():
+            print(orderitem)
+            total+=orderitem.totalCost()
+            print(total)
             return total
             
     def __str__(self):

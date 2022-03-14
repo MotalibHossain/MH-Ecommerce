@@ -21,7 +21,7 @@ def card(request,id):
 
     if userOrder.exists():
         order_Product_List=userOrder[0]
-        userOrder=Order.objects.filter(user=request.user, ordered=False)
+        # userOrder=Order.objects.filter(user=request.user, ordered=False)
         if order_Product_List.orderItem.filter(item=item):
             cardItem[0].quantity+=1
             cardItem[0].save()
@@ -40,10 +40,14 @@ def card(request,id):
 @login_required
 def Card_View(request):
     all_card_item=Card.objects.filter(user=request.user, purchased=False)
+    order=Order.objects.filter(user=request.user, ordered=False)
+    order=order[0]
+    print(order)
     # count how many product add into card through active user 
     number_of_product=Card.objects.filter(user=request.user, purchased=False).count()
     context={
         "all_card_item":all_card_item,
+        "order":order,
         "number_of_product":number_of_product,
     }
     return render(request, 'Order/shoping-cart.html', context)
