@@ -39,9 +39,11 @@ def card(request,id):
 
 @login_required
 def Card_View(request):
-    # item=Product.objects.filter(id=id)
-    # print(item)
     all_card_item=Card.objects.filter(user=request.user, purchased=False)
-    print(all_card_item)
-    context={"all_card_item":all_card_item}
+    # count how many product add into card through active user 
+    number_of_product=Card.objects.filter(user=request.user, purchased=False).count()
+    context={
+        "all_card_item":all_card_item,
+        "number_of_product":number_of_product,
+    }
     return render(request, 'Order/shoping-cart.html', context)
