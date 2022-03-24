@@ -1,8 +1,9 @@
 from email import message
 from multiprocessing import context
+from turtle import title
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 # decorators 
 from django.contrib.auth.decorators import login_required
@@ -25,8 +26,12 @@ def card(request,id):
         if order_Product_List.orderItem.filter(item=item):
             cardItem[0].quantity+=1
             cardItem[0].save()
-            messages.info(request, "Quantity added successfully")
-            return HttpResponseRedirect(reverse("shop:productDetails", kwargs={'slug':slug}))
+            # messages.info(request, "Quantity added successfully")
+            # return HttpResponseRedirect(reverse("shop:productDetails", kwargs={'slug':slug}))
+            context={
+                "title":"successfully return"
+            }
+            return JsonResponse(context)
         else:
             order_Product_List.orderItem.add(cardItem[0])
             messages.info(request, "Successfully add products.")

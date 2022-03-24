@@ -592,6 +592,33 @@
     </script>
     <!--===============================================================================================-->
     <script src="{% static 'shop/js/main.js' %}"></script>
+
+
+
+
+    <script>
+		$(document).ready(function () {
+			$("#add_to_card").click(function () {
+				console.log("click")
+				$.ajax({
+					url: "{% url 'App_Order:card' id=each_product.id %}",
+					success: (context) => {
+						// console.log(url);
+						// $("#studentForm")[0].reset();
+						// $("#message").append(context.title);
+						console.log(context.title)
+					},
+					error: (context) => {
+						$("#studentForm")[0].reset();
+						console.log(title);
+						// $("#message").append(context.title);
+						console.log(context.title)
+					}
+				});
+	
+			})
+		});
+	</script>
 </body>
 
 </html>

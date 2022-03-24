@@ -138,11 +138,17 @@
 										</div>
 									</div>
 									{% if user.is_authenticated %}
-									<a href="{% url 'App_Order:card' id=each_product.id%}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+									<!-- <a id="add_to_card" href="{% url 'App_Order:card' id=each_product.id%}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+										Add to cart
+									</a> -->
+									<a type="submit" id="add_to_card" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Add to cart
 									</a>
 									{% else %}
-									<a href="{% url 'App_User:UserLogin'%}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+									<!-- <a id="add_to_card" href="{% url 'App_User:UserLogin'%}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+										Add to cart
+									</a> -->
+									<a type="submit" id="add_to_card" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Add to cart
 									</a>
 									{% endif %}
@@ -595,30 +601,5 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		$(document).ready(function () {
-			$("#submit").click(function (e) {
-				e.preventDefault()
-				const csrftoken = $("input[name=csrfmiddlewaretoken]").val();
-				console.log(csrftoken)
-				formData = { fname: fname, lname: lname, email: email, phone: phone, csrfmiddlewaretoken: csrftoken }
-				$.ajax({
-					url: "{% url 'send' %}",
-					type: "POST",
-					data: formData,
-					dataType: "json",
-					success: (title) => {
-						$("#studentForm")[0].reset();
-						$("#message").append(title.title);
-					},
-					error: (title) => {
-						$("#studentForm")[0].reset();
-						console.log(title);
-						$("#message").append(title.title);
-					}
-				});
 	
-			})
-		});
-	</script>
 {% endblock %}
