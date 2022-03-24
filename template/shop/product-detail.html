@@ -599,11 +599,6 @@
 		$(document).ready(function () {
 			$("#submit").click(function (e) {
 				e.preventDefault()
-				console.log("click me")
-				let fname = $("#fname").val();
-				let lname = $("#lname").val();
-				let email = $("#email").val();
-				let phone = $("#phone").val();
 				const csrftoken = $("input[name=csrfmiddlewaretoken]").val();
 				console.log(csrftoken)
 				formData = { fname: fname, lname: lname, email: email, phone: phone, csrfmiddlewaretoken: csrftoken }
