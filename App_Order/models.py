@@ -47,7 +47,11 @@ class Order(models.Model):
         return total
 
 
-    
+    def totalQuantity(self):
+        x=0
+        for orderitem in self.orderItem.all():
+            x=x+orderitem.quantity
+        return x
             
     def __str__(self):
         return f'{self.user} ---> {self.orderId}'
