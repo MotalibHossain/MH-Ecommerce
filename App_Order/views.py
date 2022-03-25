@@ -1,6 +1,8 @@
 from email import message
+import mimetypes
 from multiprocessing import context
 from turtle import title
+import django
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -28,8 +30,12 @@ def card(request,id):
             cardItem[0].save()
             # messages.info(request, "Quantity added successfully")
             # return HttpResponseRedirect(reverse("shop:productDetails", kwargs={'slug':slug}))
+            all_card=Card.objects.all()
+            all_card_json=django.core.serializers.serialize('python',all_card) #.strip("[]")
+
             context={
-                "title":"successfully return"
+                "title":"successfully return",
+                "all_card_json":all_card_json
             }
             return JsonResponse(context)
         else:

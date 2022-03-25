@@ -141,16 +141,16 @@
 									<!-- <a id="add_to_card" href="{% url 'App_Order:card' id=each_product.id%}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Add to cart
 									</a> -->
-									<a type="submit" id="add_to_card" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+									<a type="submit" data-id="{{each_product.id}}" id="add_to_card" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Add to cart
 									</a>
 									{% else %}
-									<!-- <a id="add_to_card" href="{% url 'App_User:UserLogin'%}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-										Add to cart
-									</a> -->
-									<a type="submit" id="add_to_card" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+									<a id="add_to_card" href="{% url 'App_User:UserLogin'%}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Add to cart
 									</a>
+									<!-- <a type="submit" id="add_to_card" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+										Add to cart
+									</a> -->
 									{% endif %}
 								</div>
 							</div>	
@@ -601,5 +601,26 @@
 			</div>
 		</div>
 	</div>
+
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+	<script>
+		$(document).ready(function () {
+			$("#add_to_card").click(function () {
+				const id=$("#add_to_card").attr("data-id")
+				console.log("click",id)
+				$.ajax({
+					url: "{% url 'App_Order:card' id=each_product.id %}",
+					success: (context) => {
+						console.log(context)
+						$(".menu-desktop").load(location.href + ".menu-desktop>*");
+						$(".header-cart-content").load(location.href + " .header-cart-content");
+					},
+					error: (context) => {
+						console.log(context)
+					}
+				});
 	
+			})
+		});
+	</script>
 {% endblock %}
