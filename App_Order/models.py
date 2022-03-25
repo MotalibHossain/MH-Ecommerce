@@ -1,5 +1,6 @@
 from pyexpat import model
 from turtle import update
+# from typing_extensions import Self
 from urllib import request
 from venv import create
 from django.shortcuts import redirect
@@ -39,11 +40,14 @@ class Order(models.Model):
 
     def orderTotal(self):
         total=0
+
         for orderitem in self.orderItem.all():
-            print(orderitem)
             total+=orderitem.totalCost()
             print(total)
-            return total
+        return total
+
+
+    
             
     def __str__(self):
         return f'{self.user} ---> {self.orderId}'
