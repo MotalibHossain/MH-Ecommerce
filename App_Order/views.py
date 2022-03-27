@@ -28,14 +28,12 @@ def card(request,id):
         if order_Product_List.orderItem.filter(item=item).exists():
             cardItem[0].quantity+=1
             cardItem[0].save()
-            # messages.info(request, "Quantity added successfully")
-            # return HttpResponseRedirect(reverse("shop:productDetails", kwargs={'slug':slug}))
             all_card=Card.objects.all()
-            all_card_json=django.core.serializers.serialize('python',all_card) #.strip("[]")
+            all_card_json=django.core.serializers.serialize('python',all_card)
 
             context={
                 "title":"successfully return",
-                "all_card_json":all_card_json
+                "all_card_json":all_card_json,
             }
             return JsonResponse(context)
         else:
@@ -53,8 +51,6 @@ def Card_View(request):
     all_card_item=Card.objects.filter(user=request.user, purchased=False)
     order=Order.objects.filter(user=request.user, ordered=False)
     order=order[0]
-    print("----------------------",all_card_item)
-    # count how many product add into card through active user 
     number_of_product=Order.objects.filter(user=request.user, ordered=False).count() 
     context={
         "all_card_item":all_card_item,
