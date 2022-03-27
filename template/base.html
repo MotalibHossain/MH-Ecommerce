@@ -140,9 +140,9 @@
                         </div>
                         {% endif %}
                         {% if user.is_authenticated %}
-                        <a href="#"
+                        <a id="notify" href="#"
                             class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-                            data-notify="{{order.totalQuantity}}">
+                            >
                             <i class="zmdi zmdi-favorite-outline"></i>
                         </a>
                         {% else %}
@@ -594,6 +594,13 @@
     </script>
     <!--===============================================================================================-->
     <script src="{% static 'shop/js/main.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+        let quan2 = localStorage.getItem("quan")
+		console.log(quan2)
+		$("#notify").attr('data-notify', quan2)
+    });
+    </script>
 </body>
 
 </html>
