@@ -644,8 +644,6 @@
 			$.ajax({
 				url: "{% url 'App_Order:card' id=each_product.id %}",
 				success: (context) => {
-					// console.log(context)
-					// $("#main_menue_icon").load(location.href + "#main_menue_icon");
 					$(".header-cart-content").load(location.href + " .header-cart-content");
 					console.log(context.all_card_json)
 					let data = context.all_card_json
@@ -657,6 +655,7 @@
 					})
 					localStorage.setItem("quan", quan)
 					$("#notify").attr('data-notify', quan)
+					$("#notify").load(location.href + " #notifyt");
 				},
 				error: (context) => {
 					console.log(context)

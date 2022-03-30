@@ -140,17 +140,23 @@
                         </div>
                         {% endif %}
                         {% if user.is_authenticated %}
-                        <a id="notify" href="#"
-                            class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-                            >
-                            <i class="zmdi zmdi-favorite-outline"></i>
-                        </a>
+                            {% if order.totalQuantity == 0 %}
+                                <a href="#"
+                                    class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="{{order.totalQuantity}}">
+                                    <i class="zmdi zmdi-favorite-outline"></i>
+                                </a>
+                            {% else %}
+                                <div id="notify" href="#"
+                                    class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti">
+                                    <i class="zmdi zmdi-favorite-outline"></i>
+                                </div>
+                            {% endif%}
                         {% else %}
-                        <a href="#"
+                        <div href="#"
                             class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
                             data-notify="0">
                             <i class="zmdi zmdi-favorite-outline"></i>
-                        </a>
+                        </div>
                         {% endif %}
                     </div>
                 </nav>
@@ -596,9 +602,9 @@
     <script src="{% static 'shop/js/main.js' %}"></script>
     <script>
         $(document).ready(function(){
-        let quan2 = localStorage.getItem("quan")
-		console.log(quan2)
-		$("#notify").attr('data-notify', quan2)
+        let totalQuantity = localStorage.getItem("quan")
+        console.log(totalQuantity)
+		$("#notify").attr('data-notify', totalQuantity)
     });
     </script>
 </body>
