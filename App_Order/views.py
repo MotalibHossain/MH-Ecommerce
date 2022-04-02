@@ -30,10 +30,12 @@ def card(request,id):
             cardItem[0].save()
             all_card=Card.objects.all()
             all_card_json=django.core.serializers.serialize('python',all_card)
+            all_card=django.core.serializers.serialize('json',all_card)
 
             context={
                 "title":"successfully return",
                 "all_card_json":all_card_json,
+                "all_card":all_card,
             }
             return JsonResponse(context)
         else:

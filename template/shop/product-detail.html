@@ -145,7 +145,7 @@
 								<!-- <a id="add_to_card" href="{% url 'App_Order:card' id=each_product.id%}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Add to cart
 									</a> -->
-								<button id="add_to_card"
+								<button type="submit" id="add_to_card"
 									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 									Add to cart
 								</button>
@@ -647,14 +647,20 @@
 					$(".header-cart-content").load(location.href + " .header-cart-content");
 					console.log(context.all_card_json)
 					let data = context.all_card_json
+					// let data2=context.all_card.length
+
+					// console.log("card =",context.all_card)
+					// console.log("card length=",data2)
 
 					let quan = 0
 					data.map((item) => {
 						let data1 = item.fields
 						quan += data1.quantity
+						$("#notify").html(quan)
+						$("#main_menue_icon1").html(quan)
 					})
-					localStorage.setItem("quan", quan)
-					$("#notify").attr('data-notify', quan)
+					console.log("total quantity=",quan)
+					// localStorage.setItem("quan", quan)
 				},
 				error: (context) => {
 					console.log(context)
@@ -663,5 +669,14 @@
 
 		})
 	});
+	function card(){
+		if(localStorage.getItem("card") == null){
+			let card={}
+		}
+		else{
+			
+		}
+	}
+
 </script>
 {% endblock %}
