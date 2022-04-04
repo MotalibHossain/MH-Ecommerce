@@ -652,14 +652,12 @@
 					// console.log("card =",context.all_card)
 					// console.log("card length=",data2)
 
-					let quan = 0
+					let quantity = 0
 					data.map((item) => {
 						let data1 = item.fields
-						quan += data1.quantity
-						$(".badge").html(quan)
+						quantity += data1.quantity
+						$(".badge").html(quantity)
 					})
-					console.log("total quantity=",quan)
-					// localStorage.setItem("quan", quan)
 				},
 				error: (context) => {
 					console.log(context)
