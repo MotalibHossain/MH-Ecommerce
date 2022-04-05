@@ -647,10 +647,6 @@
 					$(".header-cart-content").load(location.href + " .header-cart-content");
 					console.log(context.all_card_json)
 					let data = context.all_card_json
-					// let data2=context.all_card.length
-
-					// console.log("card =",context.all_card)
-					// console.log("card length=",data2)
 
 					let quantity = 0
 					data.map((item) => {
@@ -666,14 +662,5 @@
 
 		})
 	});
-	function card(){
-		if(localStorage.getItem("card") == null){
-			let card={}
-		}
-		else{
-			
-		}
-	}
-
 </script>
 {% endblock %}
