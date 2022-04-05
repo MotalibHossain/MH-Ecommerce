@@ -79,7 +79,9 @@
 													let data = context.all_card_json
 													// console.log("my",data)
 
-													
+													let q=$("#{{product.item.id}}").val()
+													console.log("ideeeeeeeeeee",q)
+													$(".product_quentity-{{product.item.id}}").html(q)
 
 													let quantity = 0
 													data.map((item) => {
