@@ -41,12 +41,40 @@ def card(request,id):
         else:
             order_Product_List.orderItem.add(cardItem[0])
             messages.info(request, "Successfully add products.")
-            return HttpResponseRedirect(reverse("shop:productDetails", kwargs={'slug':slug}))
+            # return HttpResponseRedirect(reverse("shop:productDetails", kwargs={'slug':slug}))
+
+            
+            all_card=Card.objects.all()
+            print("object",all_card)
+            all_card_json=django.core.serializers.serialize('python',all_card)
+            all_card=django.core.serializers.serialize('json',all_card)
+            print("json",all_card)
+
+            context={
+                    "title":"successfully return",
+                    "all_card_json":all_card_json,
+                    "all_card":all_card,
+                }
+            return JsonResponse(context)
     else:
         order=Order(user=request.user)
         order.save()
         order.orderItem.add(cardItem[0])
         messages.info(request, "successfully added")
+
+        all_card=Card.objects.all()
+        print("object",all_card)
+        all_card_json=django.core.serializers.serialize('python',all_card)
+        all_card=django.core.serializers.serialize('json',all_card)
+        print("json",all_card)
+
+        context={
+                "title":"successfully return",
+                "all_card_json":all_card_json,
+                "all_card":all_card,
+            }
+        return JsonResponse(context)
+
 
 @login_required
 def Card_View(request):

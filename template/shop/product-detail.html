@@ -645,13 +645,15 @@
 				url: "{% url 'App_Order:card' id=each_product.id %}",
 				success: (context) => {
 					$(".header-cart-content").load(location.href + " .header-cart-content");
-					console.log(context.all_card_json)
+					console.log("all card data",context.all_card_json)
 					let data = context.all_card_json
 
 					let quantity = 0
 					data.map((item) => {
 						let data1 = item.fields
+						console.log("first data",data1.quantity)
 						quantity += data1.quantity
+						console.log("secound data",quantity)
 						$(".badge").html(quantity)
 					})
 				},
