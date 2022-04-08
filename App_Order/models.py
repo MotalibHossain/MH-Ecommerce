@@ -4,9 +4,9 @@ from turtle import update
 from urllib import request
 from venv import create
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.db import models
 from django.contrib.auth.models import User
-from django.urls import reverse_lazy
 from shop.models import Product
 
 # Create your models here.

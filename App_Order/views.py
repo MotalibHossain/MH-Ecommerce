@@ -14,6 +14,8 @@ from django.contrib.auth.decorators import login_required
 from App_Order.models import Card, Order
 from shop.models import Product
 
+# utils functions 
+from App_Order.utils import CardContext
 # Create your views here.
 @login_required
 def card(request,id):
@@ -28,51 +30,20 @@ def card(request,id):
         if order_Product_List.orderItem.filter(item=item).exists():
             cardItem[0].quantity+=1
             cardItem[0].save()
-            all_card=Card.objects.all()
-            all_card_json=django.core.serializers.serialize('python',all_card)
-            all_card=django.core.serializers.serialize('json',all_card)
 
-            context={
-                "title":"successfully return",
-                "all_card_json":all_card_json,
-                "all_card":all_card,
-            }
+            context=CardContext()
             return JsonResponse(context)
         else:
             order_Product_List.orderItem.add(cardItem[0])
-            messages.info(request, "Successfully add products.")
-            # return HttpResponseRedirect(reverse("shop:productDetails", kwargs={'slug':slug}))
 
-            
-            all_card=Card.objects.all()
-            print("object",all_card)
-            all_card_json=django.core.serializers.serialize('python',all_card)
-            all_card=django.core.serializers.serialize('json',all_card)
-            print("json",all_card)
-
-            context={
-                    "title":"successfully return",
-                    "all_card_json":all_card_json,
-                    "all_card":all_card,
-                }
+            context=CardContext()
             return JsonResponse(context)
     else:
         order=Order(user=request.user)
         order.save()
         order.orderItem.add(cardItem[0])
-        messages.info(request, "successfully added")
 
-        all_card=Card.objects.all()
-        print("object",all_card)
-        all_card_json=django.core.serializers.serialize('python',all_card)
-        all_card=django.core.serializers.serialize('json',all_card)
-        print("json",all_card)
-
-        context={
-                "title":"successfully return",
-                "all_card_json":all_card_json,
-                "all_card":all_card,
-            }
+        context=CardContext()
         return JsonResponse(context)
 
 
