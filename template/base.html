@@ -148,16 +148,27 @@
                         {% if user.is_authenticated %}
                         <a href="#" class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
                             <i class="zmdi zmdi-shopping-cart"></i>
+                            <span class="badge badge1">{{order.totalQuantity}}</span>
+                        </a>
+                        {% else %}
+                        <a href="#" class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
+                            <i class="zmdi zmdi-shopping-cart"></i>
                             <span class="badge">{{order.totalQuantity}}</span>
                         </a>
                         {% endif %}
+
                         {% if user.is_authenticated %}
+                        <a href="#" class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+                            <i class="zmdi zmdi-favorite-outline"></i>
+                            <span class="badge badge1">{{order.totalQuantity}}</span>
+                        </a>
+                        {% else %}
                         <a href="#" class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
                             <i class="zmdi zmdi-favorite-outline"></i>
                             <span class="badge">{{order.totalQuantity}}</span>
                         </a>
+                        {% endif %}
                     </div>
-                    {% endif %}
             </div>
             </nav>
         </div>

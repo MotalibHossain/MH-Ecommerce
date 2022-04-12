@@ -59,6 +59,7 @@ def productDetails(request,slug):
         # show all product informations and catagory product
         all_product=Product.objects.all()
         each_product=Product.objects.get(slug=slug)
+
         catagory=each_product.catagory
         this_catagory=Product.objects.filter(catagory=catagory)
 

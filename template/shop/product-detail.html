@@ -135,7 +135,7 @@
 									</div>
 
 									<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product"
-										value="1">
+										value="{{each.quantity}}">
 
 									<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 										<i class="fs-16 zmdi zmdi-plus"></i>
@@ -654,7 +654,7 @@
 						console.log("first data",data1.quantity)
 						quantity += data1.quantity
 						console.log("secound data",quantity)
-						$(".badge").html(quantity)
+						$(".badge1").html(quantity)
 					})
 				},
 				error: (context) => {
