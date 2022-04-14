@@ -16,8 +16,15 @@ from shop.models import Product
 
 # utils functions 
 from App_Order.utils import CardContext
+
+# middlewares 
+from django.utils.decorators import method_decorator
+from .middlewares.auth_middleware import authmiddleware
+
+
 # Create your views here.
-@login_required
+# @login_required
+@authmiddleware
 def card(request,id):
     item=get_object_or_404(Product, id=id)
     slug=item.slug

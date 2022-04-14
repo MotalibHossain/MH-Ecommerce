@@ -14,4 +14,3 @@ def CardContext():
         "all_card": all_card,
     }
     return context
-

@@ -7,8 +7,11 @@ from shop.models import Catagory, Product
 from App_Order.models import Card, Order
 from shop.utils import CatagoryWiseProduct
 
-# Create your views here.
 
+from .middlewares.auth_middleware import authmiddleware
+
+# Create your views here.
+@authmiddleware
 def Home(request):
     if request.user.is_authenticated:
         all_card_item=Card.objects.filter(user=request.user,  purchased=False)
