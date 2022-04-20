@@ -11,7 +11,7 @@ from shop.utils import CatagoryWiseProduct
 from .middlewares.auth_middleware import authmiddleware
 
 # Create your views here.
-@authmiddleware
+# @authmiddleware
 def Home(request):
     if request.user.is_authenticated:
         all_card_item=Card.objects.filter(user=request.user,  purchased=False)

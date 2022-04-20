@@ -78,7 +78,7 @@
                             Help & FAQs
                         </a>
                         {% if user.is_authenticated %}
-                        <a href="#" class="flex-c-m trans-04 p-lr-25">
+                        <a href="{% url 'App_User:UserLogout' %}" class="flex-c-m trans-04 p-lr-25">
                             {{request.user}}
                         </a>
                         {% else %}
