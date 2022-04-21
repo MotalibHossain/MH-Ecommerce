@@ -21,7 +21,7 @@ from django.contrib.auth import authenticate, login, logout
 #             myUrl=request.GET.get('myUrl')
 #             print("my url is here",myUrl)
 
-#             # middleware redirection code 
+#             # middleware redirection code
 
 #             # if myUrl:
 #             #     print("redirect user", myUrl)
@@ -36,29 +36,29 @@ from django.contrib.auth import authenticate, login, logout
 #     return render(request, 'User/login.html')
 
 
-
 class UserLogin(View):
-    myUrl=None
+    myUrl = None
 
-    def get(self,request):
-        UserLogin.myUrl=request.GET.get('myUrl')
+    def get(self, request):
+        # Get url url from middleware
+        UserLogin.myUrl = request.GET.get('myUrl')
         return render(request, 'User/login.html')
 
     def post(self, request):
-        email=request.POST.get('email')
-        password=request.POST.get('password')
-        user=authenticate(request, username=email, password=password)
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, username=email, password=password)
 
         if user is not None:
             login(request, user)
-            # middleware redirection code 
-
+            
+            # middleware redirection code
             if UserLogin.myUrl:
                 print("redirect user", UserLogin.myUrl)
                 return HttpResponseRedirect(UserLogin.myUrl)
             else:
-                print("home page",UserLogin.myUrl)
-                UserLogin.myUrl=None
+                print("home page", UserLogin.myUrl)
+                UserLogin.myUrl = None
             return redirect(reverse_lazy('shop:Home'))
         else:
             return redirect(reverse_lazy('App_User:UserLogin'))

@@ -12,20 +12,16 @@ class authmiddleware:
         
 
     def __call__(self, request, *args, **kwargs):
-        print("auth_middleware")
+        # This code for return url when user is not login but wants to add product add to cart.
+        # then redirect into login page and get back privious page when successfully login.
         if request.user.is_anonymous:
-            # myUrl=request.META['PATH_INFO']
-            # myUrl="/productDetails/Solid-Mens-Cotton/"
+            # Get current current full url 
             myUrl=request.META["HTTP_REFERER"]
+            # Import domain part from env using decouple package  
             p=config('DOMAIN_URL')
+            # Remove domain part from full url 
             myUrl=myUrl.replace(p, "")
-            return redirect(f'/user/login?myUrl={myUrl}')
-            # return redirect(reverse(f'App_User:UserLogin?return_url={return_url}'))     
+            return redirect(f'/user/login?myUrl={myUrl}')    
 
         response = self.get_response(request, *args, **kwargs)
         return response
-    
-    # def process_view(request, view_func, view_args, view_kwargs):
-    #     print("auth_middleware")
-    #     if not request.user.is_authenticated:
-    #         return redirect(reverse_lazy('App_User:UserLogin'))
