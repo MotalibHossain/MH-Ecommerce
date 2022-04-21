@@ -6,11 +6,6 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def UserLogin(request):
-    # myUrl=None
-    myUrl=request.GET.get('myUrl')
-    print("11111111111111",myUrl)
-    
-
     if request.method == 'POST':
         email=request.POST.get('email')
         password=request.POST.get('password')
@@ -20,16 +15,18 @@ def UserLogin(request):
 
         if user is not None:
             login(request, user)
-            # myUrl=request.GET.get('myUrl')
-            # print("my url is here",myUrl)
+            myUrl=request.GET.get('myUrl')
+            print("my url is here",myUrl)
 
-            if myUrl:
-                print("redirect user", myUrl)
-                return HttpResponseRedirect(myUrl)
-            else:
-                print("home page",myUrl)
-                # myUrl=None
-                return redirect(reverse_lazy('shop:Home'))
+            # middleware redirection code 
+            
+            # if myUrl:
+            #     print("redirect user", myUrl)
+            #     return HttpResponseRedirect(myUrl)
+            # else:
+            #     print("home page",myUrl)
+            #     # myUrl=None
+            #     return redirect(reverse_lazy('shop:Home'))
         else:
             return redirect(reverse_lazy('App_User:UserLogin'))
 

@@ -13,6 +13,8 @@ from shop.views import (
 )
 
 app_name="shop"
+from django.utils.decorators import method_decorator
+from .middlewares.auth_middleware import authmiddleware
 
 urlpatterns = [
     path('', Home, name="Home"),
@@ -21,5 +23,5 @@ urlpatterns = [
     path('blog/', Blog, name="Blog"),
     path('contact/', Contact, name="Contact"),
     path('about/', About, name="About"),
-    path('productDetails/<str:slug>/', productDetails, name="productDetails"),
+    path('productDetails/<str:slug>/', authmiddleware(productDetails), name="productDetails"),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
