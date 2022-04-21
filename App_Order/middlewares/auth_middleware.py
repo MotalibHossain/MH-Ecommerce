@@ -2,6 +2,9 @@
 from django.shortcuts import redirect
 from django.urls import reverse_lazy,reverse
 from django.http import HttpResponseRedirect
+from django.urls import resolve
+from decouple import config
+
 
 class authmiddleware:
     def __init__(self, get_response):
@@ -12,7 +15,10 @@ class authmiddleware:
         print("auth_middleware")
         if request.user.is_anonymous:
             # myUrl=request.META['PATH_INFO']
-            myUrl="http://127.0.0.1:8000/productDetails/Solid-Mens-Cotton/"
+            # myUrl="/productDetails/Solid-Mens-Cotton/"
+            myUrl=request.META["HTTP_REFERER"]
+            p=config('DOMAIN_URL')
+            myUrl=myUrl.replace(p, "")
             return redirect(f'/user/login?myUrl={myUrl}')
             # return redirect(reverse(f'App_User:UserLogin?return_url={return_url}'))     
 

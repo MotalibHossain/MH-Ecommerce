@@ -42,7 +42,6 @@ class UserLogin(View):
 
     def get(self,request):
         UserLogin.myUrl=request.GET.get('myUrl')
-        print("my url is here",UserLogin.myUrl)
         return render(request, 'User/login.html')
 
     def post(self, request):
