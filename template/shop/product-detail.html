@@ -650,6 +650,7 @@
 				success: (context) => {
 					$(".header-cart-content").load(location.href + " .header-cart-content");
 					console.log("all card data",context.all_card_json)
+					console.log("aall_carddata",context.all_card)
 					let data = context.all_card_json
 
 					let quantity = 0
