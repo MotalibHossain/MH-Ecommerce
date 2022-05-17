@@ -32,6 +32,7 @@ def card(request,id):
     userOrder=Order.objects.filter(user=request.user, ordered=False)
 
     if userOrder.exists():
+        
         order_Product_List=userOrder[0]
         # userOrder=Order.objects.filter(user=request.user, ordered=False)
         if order_Product_List.orderItem.filter(item=item).exists():
@@ -53,7 +54,7 @@ def card(request,id):
         context=CardContext()
         return JsonResponse(context)
 
-
+        
 @login_required
 def Card_View(request):
     all_card_item=Card.objects.filter(user=request.user, purchased=False)
