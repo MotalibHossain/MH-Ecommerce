@@ -39,19 +39,19 @@ def card(request,id):
             cardItem[0].quantity+=1
             cardItem[0].save()
 
-            context=CardContext()
+            context=CardContext(request)
             return JsonResponse(context)
         else:
             order_Product_List.orderItem.add(cardItem[0])
 
-            context=CardContext()
+            context=CardContext(request)
             return JsonResponse(context)
     else:
         order=Order(user=request.user)
         order.save()
         order.orderItem.add(cardItem[0])
 
-        context=CardContext()
+        context=CardContext(request)
         return JsonResponse(context)
 
         

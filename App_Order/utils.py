@@ -1,11 +1,11 @@
+from urllib import request
 import django
 # model 
 from App_Order.models import Card, Order
 from shop.models import Product
 
-
-def CardContext():
-    all_card = Card.objects.all()
+def CardContext(request):
+    all_card = Card.objects.filter(user=request.user, purchased=False)
     all_card_json = django.core.serializers.serialize('python', all_card)
     all_card = django.core.serializers.serialize('json', all_card)
     context = {
