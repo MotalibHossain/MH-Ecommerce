@@ -649,10 +649,12 @@
 				url: "{% url 'App_Order:card' id=each_product.id  %}",
 				success: (context) => {
 					$(".header-cart-content").load(location.href + " .header-cart-content");
-					console.log("all card data",context.all_card_json)
-					console.log("aall_carddata",context.all_card)
+					// console.log("all card data",context.all_card_json)
+					// console.log("aall_carddata",context.all_card)
 					let data = context.all_card_json
 
+
+					//when you add a product into add to cart then quantity number show in add to card icon depending on user.
 					let quantity = 0
 					data.map((item) => {
 						let data1 = item.fields
