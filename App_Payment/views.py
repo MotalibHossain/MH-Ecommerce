@@ -5,4 +5,4 @@ from django.shortcuts import render
 # Create your views here.
 
 def payment(request):
-    return HttpResponse("payment")
+    return HttpResponse("we implement our ssl payment method")
