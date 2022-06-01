@@ -14,3 +14,15 @@ class PaymentInfo(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def is_all_filled(self):
+        # check all field are fillup or not 
+        all_fildes=[f.name for f in self._meta.get_fields()]
+
+        for filds in all_fildes:
+            value=getattr(self, filds)
+
+            if value==None or value== " ":
+                return False
+        return True
+
