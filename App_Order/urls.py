@@ -1,7 +1,7 @@
 
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path, include
+from django.urls import path
 from App_Order.views import card, Card_View
 
 # middlewares 

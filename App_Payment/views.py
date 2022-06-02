@@ -14,15 +14,21 @@ def payment(request):
     if request.user.is_authenticated:
         order=Order.objects.filter(user=request.user, ordered=False)
         order=order[0]
-        context={
-            "order":order,
-        }
 
-        return render(request, "payment/placeorder.html", context)
+        def get_data_from_post(request, fields):
+            form_data=dict()
+            for field in fields:
+                value=request.Post.get("field")
+                form_data[field]=value
+            return form_data
+        
+        if request.method=="POST":
+            form_field_data=get_data_from_post(request,["house", "address", "country", "city", "zip"])
 
-    else:
-        order=Order.objects.filter(user=request.user, ordered=False)
-        order=order[0]
+
+
+
+
         context={
             "order":order,
         }
