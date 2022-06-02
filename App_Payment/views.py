@@ -13,6 +13,7 @@ from App_Payment.models import PaymentInfo
 @login_required
 def payment(request):
     if request.user.is_authenticated:
+        payment_info=PaymentInfo.objects.filter(user=request.user)
         def get_data_from_post(request, fields):
             form_data=dict()
             for field in fields:
@@ -29,12 +30,8 @@ def payment(request):
             city=form_field_data['city'],
             zip=form_field_data['zip'])
 
-            print("form field data",form_field_data)
-            print("payment_info",payment_info)
-
             payment_info.save()
         
-        payment_info=PaymentInfo.objects.get_or_create(user=request.user)
         order=Order.objects.filter(user=request.user, ordered=False)
         order=order[0]
 

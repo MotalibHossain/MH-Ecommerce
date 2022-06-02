@@ -21,7 +21,10 @@ class PaymentInfo(models.Model):
 
         for filds in all_fildes:
             value=getattr(self, filds)
-            if value==None or value== " ":
+            if value==None or value== "":
+                print("false")
                 return False
+            else:
+                print("true")
         return True
 
