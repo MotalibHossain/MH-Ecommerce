@@ -1,3 +1,4 @@
+from genericpath import exists
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -24,13 +25,20 @@ def payment(request):
         if request.method=="POST":
             form_field_data=get_data_from_post(request,["house", "address", "country", "city", "zip"])
 
-            payment_info=PaymentInfo(user=request.user, house=form_field_data['house'],
+            Billing_info=PaymentInfo(user=request.user, house=form_field_data['house'],
             address=form_field_data['address'],
             country=form_field_data['country'],
             city=form_field_data['city'],
             zip=form_field_data['zip'])
 
-            payment_info.save()
+            if payment_info.exists():
+                payment_info.update(user=request.user, house=form_field_data['house'],
+                                    address=form_field_data['address'],
+                                    country=form_field_data['country'],
+                                    city=form_field_data['city'],
+                                    zip=form_field_data['zip'])
+            else:
+                Billing_info.save()
         
         order=Order.objects.filter(user=request.user, ordered=False)
         order=order[0]
