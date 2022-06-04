@@ -1,6 +1,7 @@
 from genericpath import exists
 from django.http import HttpResponse
 from django.shortcuts import render
+from App_Payment.utils import get_data_from_post
 
 # decorators 
 from django.contrib.auth.decorators import login_required
@@ -15,13 +16,7 @@ from App_Payment.models import PaymentInfo
 def payment(request):
     if request.user.is_authenticated:
         payment_info=PaymentInfo.objects.filter(user=request.user)
-        def get_data_from_post(request, fields):
-            form_data=dict()
-            for field in fields:
-                value=request.POST.get(field)
-                form_data[field]=value
-            return form_data
-        
+
         if request.method=="POST":
             form_field_data=get_data_from_post(request,["house", "address", "country", "city", "zip"])
 
