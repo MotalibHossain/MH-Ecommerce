@@ -45,7 +45,7 @@ def payment(request):
 
         context={
             "order":order,
-            "payment_info":payment_info
+            "payment_info":payment_info,
         }
 
         return render(request, "payment/placeorder.html", context)

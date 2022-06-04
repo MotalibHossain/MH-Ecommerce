@@ -59,11 +59,10 @@
                     </div>
                 </form>
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-5">
-                    {% if payment_info.is_all_filled %}
+                    {% if payment_info.0.is_all_filled %}
                     <button class="btn btn-success">Pay Bill</button>
-                    <button class="btn btn-success">{{payment_info}}</button>
                     {% else %}
-                    <p class="bg-denger">Please fill up your all billing address {{payment_info}}</p>
+                    <p class="bg-denger">Please fill up your all billing address-{{payment_info_user}}</p>
                     {% endif %}
                 </div>
             </div>
