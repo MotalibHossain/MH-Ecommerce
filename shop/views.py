@@ -17,14 +17,6 @@ def Home(request):
         all_card_item=Card.objects.filter(user=request.user,  purchased=False)
         order=Order.objects.filter(user=request.user, ordered=False)
 
-        # count how many product add into card through active user
-        # order=order[0]
-        # if order:
-        # else:
-        #     order=order[0:1]
-
-        # number_of_product=Card.objects.filter(user=request.user, purchased=False).count()
-
         all_catagory = Catagory.objects.all()
         all_product = Product.objects.all()
         # Showing product catagory wise
@@ -63,7 +55,7 @@ def productDetails(request,slug):
         order=Order.objects.filter(user=request.user, ordered=False)
         # order=order[0]
         number_of_product=Card.objects.filter(user=request.user, purchased=False).count()
-        
+
         # show all product informations and catagory product
         all_product=Product.objects.all()
         each_product=Product.objects.get(slug=slug)

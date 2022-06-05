@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from pyexpat import model
 from turtle import update
 # from typing_extensions import Self
@@ -54,7 +55,13 @@ class Order(models.Model):
         return x
 
     def is_order_null(self):
-        fields=[f.name for f in self._get]
+        fields=[f.name for f in self._meta.get_fields()]
+        for field in fields:
+            value=getattr(self,field)
+            if value==NULL or value=="":
+                return False
+        return True
+
             
     def __str__(self):
         return f'{self.user} ---> {self.orderId}'
