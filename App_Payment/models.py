@@ -17,7 +17,6 @@ class PaymentInfo(models.Model):
 
     def is_all_filled(self):
         # check all field are fillup or not 
-        print("mmmmmmmmmmmmmm")
         all_fildes=[f.name for f in self._meta.get_fields()]
 
         for filds in all_fildes:

@@ -52,6 +52,9 @@ class Order(models.Model):
         for orderitem in self.orderItem.all():
             x=x+orderitem.quantity
         return x
+
+    def is_order_null(self):
+        fields=[f.name for f in self._get]
             
     def __str__(self):
         return f'{self.user} ---> {self.orderId}'

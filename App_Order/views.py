@@ -59,7 +59,6 @@ def card(request,id):
 def Card_View(request):
     all_card_item=Card.objects.filter(user=request.user, purchased=False)
     order=Order.objects.filter(user=request.user, ordered=False)
-    order=order[0]
     number_of_product=Order.objects.filter(user=request.user, ordered=False).count() 
     context={
         "all_card_item":all_card_item,
