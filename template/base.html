@@ -145,35 +145,44 @@
                         <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
                             <i class="zmdi zmdi-search"></i>
                         </div>
-                        {% if order.0.is_order_null %}
+                        {% if order.0.is_order_null != Null %}
                             {% if user.is_authenticated %}
-                            <a href="#" class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
-                                <i class="zmdi zmdi-shopping-cart"></i>
-                                <span class="badge badge1">{{order.0.totalQuantity}}</span>
-                            </a>
+                                <a href="#"
+                                    class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
+                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                    <span class="badge badge1">{{order.0.totalQuantity}}</span>
+                                </a>
                             {% else %}
-                            <a href="#" class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
+                                <a href="#"
+                                    class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
+                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                    <span class="badge">0</span>
+                                </a>
+                            {% endif %}
+
+                            <!-- Love reaction icon  -->
+
+                            {% if user.is_authenticated %}
+                                <a href="#" class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+                                    <i class="zmdi zmdi-favorite-outline"></i>
+                                    <span class="badge badge1">{{order.0.totalQuantity}}</span>
+                                </a>
+                            {% else %}
+                                <a href="#" class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+                                    <i class="zmdi zmdi-favorite-outline"></i>
+                                    <span class="badge">0</span>
+                                </a>
+                            {% endif %}
+                        {% else %}
+                            <a href="#"
+                                class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
                                 <i class="zmdi zmdi-shopping-cart"></i>
                                 <span class="badge">0</span>
                             </a>
-                            {% endif %}
-                        {% else %}
-                        <a href="#" class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
-                            <i class="zmdi zmdi-shopping-cart"></i>
-                            <span class="badge">0</span>
-                        </a>
-                        {% endif %}
-
-                        {% if user.is_authenticated %}
-                        <a href="#" class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-                            <i class="zmdi zmdi-favorite-outline"></i>
-                            <span class="badge badge1">{{order.0.totalQuantity}}</span>
-                        </a>
-                        {% else %}
-                        <a href="#" class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-                            <i class="zmdi zmdi-favorite-outline"></i>
-                            <span class="badge">0</span>
-                        </a>
+                            <a href="#" class="header-iconm dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+                                <i class="zmdi zmdi-favorite-outline"></i>
+                                <span class="badge">0</span>
+                            </a>
                         {% endif %}
                     </div>
             </div>
@@ -295,7 +304,7 @@
         </div>
     </header>
     <!-- Cart -->
-    <div class="wrap-header-cart js-panel-cart">
+    <div id="header-card" class="wrap-header-cart js-panel-cart">
         <div class="s-full js-hide-cart"></div>
 
         <div class="header-cart flex-col-l p-l-65 p-r-25">

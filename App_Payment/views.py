@@ -36,7 +36,6 @@ def payment(request):
                 Billing_info.save()
         
         order=Order.objects.filter(user=request.user, ordered=False)
-        order=order[0]
 
         context={
             "order":order,
