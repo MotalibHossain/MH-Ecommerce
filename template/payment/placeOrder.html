@@ -60,7 +60,7 @@
                 </form>
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-5">
                     {% if payment_info.0.is_all_filled %}
-                    <button class="btn btn-success">Pay Bill</button>
+                    <a href="{% url 'App_Payment:BillPay' %}" class="btn btn-success">Pay Bill</a>
                     {% else %}
                     <p class="text-danger text-bold">Please fill up your all billing address.</p>
                     {% endif %}
@@ -146,7 +146,7 @@
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="zip">Zip</label>
-                            <input name="zip" type="text" class="form-control" id="zip" placeholder="" required>
+                            <input name="zip" type="text" class="form-control" id="zip" placeholder="" >
                             <div class="invalid-feedback">
                                 Zip code required.
                             </div>

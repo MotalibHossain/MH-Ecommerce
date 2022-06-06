@@ -1,6 +1,8 @@
 from genericpath import exists
+from turtle import ht
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
 from App_Payment.utils import get_data_from_post
 
 # decorators 
@@ -43,4 +45,13 @@ def payment(request):
         }
 
         return render(request, "payment/placeorder.html", context)
+
+@login_required
+def BillPay(request):
+    payment_info=PaymentInfo.objects.get_or_create(user=request.user)
+
+    if payment_info[0].is_all_filled():
+        return HttpResponse("pay bill")
+    else:
+        return redirect (reverse_lazy('App_Payment:payment'))
 
