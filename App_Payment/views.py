@@ -18,6 +18,7 @@ from App_Payment.models import PaymentInfo
 def payment(request):
     if request.user.is_authenticated:
         all_card_item=Card.objects.filter(user=request.user, purchased=False)
+        all_card_item=Card.objects.filter(user=request.user,  purchased=False)
         payment_info=PaymentInfo.objects.filter(user=request.user)
 
         if request.method=="POST":
@@ -44,6 +45,7 @@ def payment(request):
             "order":order,
             "payment_info":payment_info,
             "all_card_item":all_card_item,
+            "all_card_item":all_card_item
         }
 
         return render(request, "payment/placeorder.html", context)
