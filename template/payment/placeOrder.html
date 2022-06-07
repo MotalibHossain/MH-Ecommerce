@@ -16,14 +16,34 @@
                     <span class="badge badge-secondary badge-pill">3</span>
                 </h4> -->
                 <ul class="list-group mb-3 p-t-70">
+                    {% for product in all_card_item%}
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
                         <div>
-                            <h6 class="my-0">Product name</h6>
-                            <small class="text-muted">Brief description</small>
+                            <h6 class="my-0">{{product.item.name|truncatewords:"5"}}</h6>
+                            <small class="text-muted">{{product.item.description |truncatewords:"5"}}</small>
                         </div>
-                        <span class="text-muted">$12</span>
+                        <span class="text-muted text-bold">{{product.item.price}}
+                            <span class="mtext-110 cl2 text text-bold text-success"> TK</span>
+                        </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    {% endfor %}
+                    <form class="card p-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Promo code">
+                            <div class="input-group-append pl-2">
+                                <button type="submit" class="btn btn-success">Redeem</button>
+                            </div>
+                        </div>
+                    </form>
+                    <li class="border border-top-5 border-warning p-3 d-flex justify-content-between lh-condensed mt-2">
+                        <div>
+                            <h6 class="my-0 text-bold h2">Total</h6>
+                        </div>
+                        <span class=" h3">{{order.0.orderTotal}} 
+                            <span class="mtext-110 cl2 text text-bold text-success"> TK</span>
+                        </span>
+                    </li>
+                    <!-- <li class="list-group-item d-flex justify-content-between lh-condensed">
                         <div>
                             <h6 class="my-0">Second product</h6>
                             <small class="text-muted">Brief description</small>
@@ -47,20 +67,12 @@
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total (USD)</span>
                         <strong>$20</strong>
-                    </li>
+                    </li> -->
                 </ul>
 
-                <form class="card p-2">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Promo code">
-                        <div class="input-group-append pl-2">
-                            <button type="submit" class="btn btn-secondary">Redeem</button>
-                        </div>
-                    </div>
-                </form>
-                <div class="col-lg-12 col-md-12 col-sm-12 mt-5">
+                <div class="col-lg-12 col-md-12 col-sm-12 mt-3 px-0">
                     {% if payment_info.0.is_all_filled %}
-                    <a href="{% url 'App_Payment:BillPay' %}" class="btn btn-success">Pay Bill</a>
+                    <a href="{% url 'App_Payment:BillPay' %}" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">Payment</a>
                     {% else %}
                     <p class="text-danger text-bold">Please fill up your all billing address.</p>
                     {% endif %}
@@ -88,7 +100,7 @@
                     </div> -->
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="username">House address</label>
+                            <label for="username" class="text-bold">House address</label>
                             <div class="input-group">
                                 <!-- <div class="input-group-prepend">
                                     <span class="input-group-text">@</span>
@@ -101,7 +113,7 @@
                         </div>
     
                         <div class="col-md-6 mb-3">
-                            <label for="email">Address <span class="text-muted">(Optional)</span></label>
+                            <label for="email" class="text-bold">Address <span class="text-bold">(Optional)</span></label>
                             <input name="address" type="text" class="form-control" id="email" placeholder="address">
                             <div class="invalid-feedback">
                                 Please enter a valid  address for shipping updates.
