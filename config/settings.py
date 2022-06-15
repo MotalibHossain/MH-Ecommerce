@@ -22,6 +22,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -34,6 +35,9 @@ INSTALLED_APPS = [
     'App_User.apps.AppUserConfig',
     'App_Order.apps.AppOrderConfig',
     'App_Payment.apps.AppPaymentConfig',
+
+    #Install thirdparty 
+    
 ]
 
 MIDDLEWARE = [

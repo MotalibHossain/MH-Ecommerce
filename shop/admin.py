@@ -3,6 +3,8 @@ from django.contrib import admin
 from shop.models import Catagory, Product
 
 # Register your models here.
+# admin.site.register(Product)
+# admin.site.register(Catagory)
 @admin.register(Catagory)
 class CatagoryAdmin(admin.ModelAdmin):
     list_display=['name']
